@@ -1,5 +1,6 @@
+import sys
 from django.utils import unittest
-from django.utils.functional import lazy, lazy_property
+from django.utils.functional import lazy, lazy_property, SimpleLazyObject
 
 
 class FunctionalTestCase(unittest.TestCase):
@@ -37,3 +38,10 @@ class FunctionalTestCase(unittest.TestCase):
 
         self.assertRaises(NotImplementedError, lambda: A().do)
         self.assertEqual(B().do, 'DO IT')
+
+    def test_simplelazyobject_traceable(self):
+        def tracer(frame, event, arg):
+            frame.f_locals['self'].__class__
+        sys.settrace(tracer)
+        SimpleLazyObject(lambda x: x)
+        sys.settrace(None)

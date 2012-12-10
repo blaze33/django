@@ -210,6 +210,8 @@ class LazyObject(object):
     By subclassing, you have the opportunity to intercept and alter the
     instantiation. If you don't need to do that, use SimpleLazyObject.
     """
+    _wrapped = None
+
     def __init__(self):
         self._wrapped = empty
 
