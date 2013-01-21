@@ -43,5 +43,5 @@ class FunctionalTestCase(unittest.TestCase):
         def tracer(frame, event, arg):
             frame.f_locals['self'].__class__
         sys.settrace(tracer)
-        SimpleLazyObject(lambda x: x)
+        SimpleLazyObject(None)
         sys.settrace(None)
